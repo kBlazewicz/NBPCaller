@@ -17,12 +17,12 @@ public class GoldPriceService {
         this.restTemplate = restTemplate;
     }
 
-    public float getGoldPriceDaysAvg(int days) {
+    public double getGoldPriceDaysAvg(int days) {
         return calculateAvgGoldPrice(days);
     }
 
     private float calculateAvgGoldPrice(int days) {
-        List<GoldPrice> goldPrices = getGoldPrices(days);
+        List<GoldPrice> goldPrices = getGoldPricesList(days);
         float result = 0;
         for (GoldPrice goldPrice : goldPrices) {
             result += goldPrice.getPrice();
@@ -30,7 +30,7 @@ public class GoldPriceService {
         return result / days;
     }
 
-    private List<GoldPrice> getGoldPrices(int days) {
+    private List<GoldPrice> getGoldPricesList(int days) {
         ResponseEntity<List<GoldPrice>> responseEntity =
                 restTemplate.exchange(
                         "http://api.nbp.pl/api/cenyzlota/last/" + days + "/?format=json",

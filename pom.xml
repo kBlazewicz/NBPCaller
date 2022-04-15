@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>NBPcaller</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>NBPcaller</name>
-    <description>NBPcaller</description>
+    <name>NBPCaller</name>
+    <description>NBPCaller</description>
     <properties>
         <java.version>17</java.version>
     </properties>

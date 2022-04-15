@@ -1,27 +1,24 @@
 package com.example.nbpcaller.mappers;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
-// using lombok for code clarity
 @NoArgsConstructor
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GoldPrice {
-    @JsonProperty("cena")
-    private double price;
-
-    @JsonProperty("data")
-    private LocalDate date;
+public class Rate {
+    private String no;
+    private LocalDate effectiveDate;
+    private double mid;
 
     @Override
     public String toString() {
-        return "{\"data\":\"" + date + ",\",\"cena\":" + price + "}";
+        return "{\"no\":\"" + no + "\",\"effectiveDate\":\"" + effectiveDate + "\",\"mid\":" + mid + "}";
     }
 }

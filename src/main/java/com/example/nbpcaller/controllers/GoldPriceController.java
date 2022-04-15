@@ -14,7 +14,7 @@ public class GoldPriceController {
     }
 
     @RequestMapping("api/gold-price/average")
-    public float getGoldPriceAvg() {
+    public double getGoldPriceAvg() {
         return goldPriceService.getGoldPriceDaysAvg(14);
     }
 
