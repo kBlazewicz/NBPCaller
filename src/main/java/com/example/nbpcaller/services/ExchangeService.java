@@ -1,6 +1,9 @@
 package com.example.nbpcaller.services;
 
 import com.example.nbpcaller.mappers.ExchangeRatesSeries;
+import com.example.nbpcaller.mappers.ExchangeRatesSeriesSimple;
+import com.example.nbpcaller.mappers.Rate;
+import com.example.nbpcaller.mappers.RateSimple;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +19,8 @@ public class ExchangeService {
         this.restTemplate = restTemplate;
     }
 
-    public ExchangeRatesSeries getExchangeRate(String currencyCode) {
-        return getExchangeRatesSeries(currencyCode);
+    public ExchangeRatesSeriesSimple getExchangeRate(String currencyCode) {
+        return simplifyExchangeRatesSeries(getExchangeRatesSeries(currencyCode));
     }
 
     private ExchangeRatesSeries getExchangeRatesSeries(String currencyCode) {
@@ -29,7 +32,14 @@ public class ExchangeService {
                         new ParameterizedTypeReference<ExchangeRatesSeries>() {
                         }
                 );
-        ExchangeRatesSeries exchangeRatesSeries = responseEntity.getBody();
-        return exchangeRatesSeries;
+        return responseEntity.getBody();
+    }
+
+    private ExchangeRatesSeriesSimple simplifyExchangeRatesSeries(ExchangeRatesSeries exchangeRatesSeries) {
+        ExchangeRatesSeriesSimple simplifiedSeries = new ExchangeRatesSeriesSimple(exchangeRatesSeries.getCurrency());
+        for (Rate rate : exchangeRatesSeries.getRates()) {
+            simplifiedSeries.addRate(new RateSimple(rate.getEffectiveDate(), rate.getMid()));
+        }
+        return simplifiedSeries;
     }
 }
