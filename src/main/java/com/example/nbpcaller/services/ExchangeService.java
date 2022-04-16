@@ -1,9 +1,9 @@
 package com.example.nbpcaller.services;
 
-import com.example.nbpcaller.mappers.ExchangeRatesSeries;
-import com.example.nbpcaller.mappers.ExchangeRatesSeriesSimple;
-import com.example.nbpcaller.mappers.Rate;
-import com.example.nbpcaller.mappers.RateSimple;
+import com.example.nbpcaller.mappers.apiRequests.ExchangeRatesSeriesSimple;
+import com.example.nbpcaller.mappers.apiRequests.RateSimple;
+import com.example.nbpcaller.mappers.externalRequests.ExchangeRatesSeries;
+import com.example.nbpcaller.mappers.externalRequests.Rate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,14 @@ public class ExchangeService {
         this.restTemplate = restTemplate;
     }
 
-    public ExchangeRatesSeriesSimple getExchangeRate(String currencyCode) {
-        return simplifyExchangeRatesSeries(getExchangeRatesSeries(currencyCode));
+    public ExchangeRatesSeriesSimple getExchangeRate(String currencyCode, int days) {
+        return simplifyExchangeRatesSeries(getExchangeRatesSeries(currencyCode, days));
     }
 
-    private ExchangeRatesSeries getExchangeRatesSeries(String currencyCode) {
+    private ExchangeRatesSeries getExchangeRatesSeries(String currencyCode, int days) {
         ResponseEntity<ExchangeRatesSeries> responseEntity =
                 restTemplate.exchange(
-                        "http://api.nbp.pl/api/exchangerates/rates/a/" + currencyCode + "/last/5/?format=json",
+                        "http://api.nbp.pl/api/exchangerates/rates/a/" + currencyCode + "/last/" + days + "/?format=json",
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<ExchangeRatesSeries>() {

@@ -1,8 +1,12 @@
 package com.example.nbpcaller.controllers;
 
+import com.example.nbpcaller.mappers.apiRequests.GoldPriceModified;
+import com.example.nbpcaller.mappers.externalRequests.GoldPrice;
+import com.example.nbpcaller.services.GoldPriceService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.nbpcaller.services.GoldPriceService;
+
+import java.util.List;
 
 @RestController
 public class GoldPriceController {
@@ -14,8 +18,8 @@ public class GoldPriceController {
     }
 
     @RequestMapping("api/gold-price/average")
-    public double getGoldPriceAvg() {
-        return goldPriceService.getGoldPriceDaysAvg(14);
+    public List<GoldPriceModified> getGoldPriceAvg() {
+        return goldPriceService.getGoldPriceDays(14);
     }
 
 }

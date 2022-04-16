@@ -1,4 +1,4 @@
-package com.example.nbpcaller.mappers;
+package com.example.nbpcaller.mappers.apiRequests;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,12 +1,14 @@
 package com.example.nbpcaller.services;
 
-import com.example.nbpcaller.mappers.GoldPrice;
+import com.example.nbpcaller.mappers.apiRequests.GoldPriceModified;
+import com.example.nbpcaller.mappers.externalRequests.GoldPrice;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,17 +19,16 @@ public class GoldPriceService {
         this.restTemplate = restTemplate;
     }
 
-    public double getGoldPriceDaysAvg(int days) {
-        return calculateAvgGoldPrice(days);
+    public List<GoldPriceModified> getGoldPriceDays(int days) {
+        return modifyAttributes(getGoldPricesList(days));
     }
 
-    private float calculateAvgGoldPrice(int days) {
-        List<GoldPrice> goldPrices = getGoldPricesList(days);
-        float result = 0;
-        for (GoldPrice goldPrice : goldPrices) {
-            result += goldPrice.getPrice();
+    private List<GoldPriceModified> modifyAttributes(List<GoldPrice> goldPricesList) {
+        List<GoldPriceModified> goldPriceModifiedList = new ArrayList<>();
+        for(GoldPrice goldPrice : goldPricesList){
+            goldPriceModifiedList.add(new GoldPriceModified(goldPrice.getPrice(),goldPrice.getDate()));
         }
-        return result / days;
+        return goldPriceModifiedList;
     }
 
     private List<GoldPrice> getGoldPricesList(int days) {
@@ -39,7 +40,6 @@ public class GoldPriceService {
                         new ParameterizedTypeReference<List<GoldPrice>>() {
                         }
                 );
-        List<GoldPrice> goldPrices = responseEntity.getBody();
-        return goldPrices;
+        return responseEntity.getBody();
     }
 }

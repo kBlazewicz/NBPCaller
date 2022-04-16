@@ -1,4 +1,4 @@
-package com.example.nbpcaller.mappers;
+package com.example.nbpcaller.mappers.apiRequests;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class ExchangeRatesSeriesSimple {
     private final String currency;
-    private final List<RateSimple> rateSimpleList = new ArrayList<>();
+    private final List<RateSimple> rates = new ArrayList<>();
 
     public ExchangeRatesSeriesSimple(String currency) {
         this.currency = currency;
@@ -18,10 +18,10 @@ public class ExchangeRatesSeriesSimple {
 
     @Override
     public String toString() {
-        return "{\"currency\":\"" + currency + ",\"rates\":" + rateSimpleList + "}";
+        return "{\"currency\":\"" + currency + ",\"rates\":" + rates + "}";
     }
 
     public void addRate(RateSimple rateSimple) {
-        rateSimpleList.add(rateSimple);
+        rates.add(rateSimple);
     }
 }

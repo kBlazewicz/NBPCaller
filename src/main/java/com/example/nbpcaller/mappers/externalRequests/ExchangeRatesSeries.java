@@ -1,7 +1,6 @@
-package com.example.nbpcaller.mappers;
+package com.example.nbpcaller.mappers.externalRequests;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

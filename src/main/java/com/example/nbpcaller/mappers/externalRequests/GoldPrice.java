@@ -1,4 +1,4 @@
-package com.example.nbpcaller.mappers;
+package com.example.nbpcaller.mappers.externalRequests;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-// using lombok for code clarity
 @NoArgsConstructor
 @Getter
 @Setter

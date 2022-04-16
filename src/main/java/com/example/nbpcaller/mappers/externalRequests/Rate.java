@@ -1,4 +1,4 @@
-package com.example.nbpcaller.mappers;
+package com.example.nbpcaller.mappers.externalRequests;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
