@@ -48,4 +48,6 @@
   `mvn spring-boot:run`
 
 <br>
-  
+
+#### Example
+![Example video](./example.gif)
